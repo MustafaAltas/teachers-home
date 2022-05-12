@@ -6,11 +6,13 @@ import TeacherLogin from "../pages/TeacherLogin";
 import TeacherRegister from "../pages/TeacherRegister";
 import About from "../pages/About";
 import Contact from "../pages/Contact";
+import Sidebar from "../components/Sidebar";
 
 function AppRouter() {
   return (
       <Router>
           <Navbar/>
+          <Sidebar/>
           <Routes>
               <Route path="/" element={<Main/>}/>
               <Route path="/about" element={<About/>}/>
