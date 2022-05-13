@@ -63,6 +63,7 @@ const Wrapper = styled.div`
       display: none;
     }
     @media screen and (max-width: 750px) {
+      display: flex;
       .nav-loginregister {
         display: none;
       }
