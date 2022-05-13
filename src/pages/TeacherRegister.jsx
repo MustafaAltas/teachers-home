@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import styled from "styled-components";
+import AppContext from "../context/AppContext";
+import { teacherRegister } from "../firebase/Firebase";
 
 const ForLogin = styled.div`
   height: 100vh;
@@ -54,6 +56,7 @@ const myValidationSchema = Yup.object({
 });
 
 function TeacherRegister() {
+  const {setCurrentTeacher,currentTeacher} = useContext(AppContext)
   const initialValues = {
     firstname: "",
     lastname: "",
@@ -63,6 +66,8 @@ function TeacherRegister() {
   };
 
   const handleSubmit = (values, { resetForm }) => {
+    const isimSoyisim = `${values.firstname.charAt(0).toUpperCase() + values.firstname.slice(1)} ${values.lastname.charAt(0).toUpperCase() +values.lastname.slice(1)}`
+    teacherRegister(values.email,values.password,isimSoyisim)
     alert(
       `
           firstname : ${values.firstname},
