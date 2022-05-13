@@ -8,6 +8,12 @@ import IconButton from "@mui/material/IconButton";
 import AppContext from "../context/AppContext";
 
 const Wrapper = styled.div`
+  background: rgb(235, 235, 235);
+  background: linear-gradient(
+    180deg,
+    rgba(235, 235, 235, 1) 0%,
+    rgba(255, 255, 255, 1) 100%
+  );
   .show-navbar {
     height: 3rem;
     display: flex;
@@ -20,19 +26,38 @@ const Wrapper = styled.div`
       display: flex;
       gap: 2rem;
       a {
-        text-decoration: none;
+        position: relative;
+        padding: 1rem 0 0.5rem;
+        margin: 0 1.5rem;
         color: black;
-        font-family: "Roboto", sans-serif;
-        font-weight: 700;
+        text-decoration: none;
+        text-transform: uppercase;
+        &::after {
+          content: "";
+          position: absolute;
+          left: 50%;
+          bottom: 0;
+          transform: translateX(-50%) scaleX(0);
+          transform-origin: 50% 50%;
+          width: 100%;
+          height: 1px;
+          background-color: rgba(0, 0, 0, 0.8);
+          transition: transform 250ms;
+        }
+        &:hover {
+          &::after {
+            transform: translateX(-50%) scaleX(1);
+          }
+        }
       }
-      li {
+
+      /* li {
         transition: all 0.5s;
       }
       li:hover {
         transform: translateX(5%) scale(0.95);
-        text-decoration: underline;
-        background-color: rgba(255, 255, 255, 0.5);
-      }
+        background-color: rgba(0, 0, 0, 0.1);
+      } */
     }
     .nav-hamburger {
       display: none;
