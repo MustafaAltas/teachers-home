@@ -76,7 +76,8 @@ const Wrapper = styled.div`
   }
 `;
 function Sidebar() {
-  const { forSideBarIsOpen, setForSideBarIsOpen } = useContext(AppContext);
+  const { forSideBarIsOpen, setForSideBarIsOpen, currentTeacher } =
+    useContext(AppContext);
   const handleCancel = () => {
     setForSideBarIsOpen(!forSideBarIsOpen);
   };
@@ -101,6 +102,19 @@ function Sidebar() {
               <Link to="/contact">Contact Us</Link>
             </li>
           </ul>
+          {currentTeacher && (
+            <ul className="nav-links">
+              <li>
+                <Link to="/">Main</Link>
+              </li>
+              <li>
+                <Link to="/about">About</Link>
+              </li>
+              <li>
+                <Link to="/contact">Contact Us</Link>
+              </li>
+            </ul>
+          )}
         </nav>
         <LoginAndRegisterComp />
       </div>

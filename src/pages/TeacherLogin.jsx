@@ -4,7 +4,8 @@ import Button from "@mui/material/Button";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import styled from "styled-components";
-
+import { teacherLoginFirebase } from "../firebase/Firebase"; 
+import {useNavigate } from "react-router-dom";
 const ForLogin = styled.div`
   height: 100vh;
   display: flex;
@@ -45,14 +46,10 @@ function TeacherLogin() {
     password: "",
 
   };
+  const navigate = useNavigate()
 
   const handleSubmit = (values, { resetForm }) => {
-    console.log(values.email)
-    alert(
-      `
-          firstname : ${values.email},
-          `
-    );
+    teacherLoginFirebase(values.email,values.password,navigate);
     resetForm();
   };
   return (

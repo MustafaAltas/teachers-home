@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { createUserWithEmailAndPassword, getAuth, updateProfile } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth, updateProfile,signInWithEmailAndPassword, onAuthStateChanged, signOut } from "firebase/auth";
 
 // TODO: Replace the following with your app's Firebase project configuration
 // See: https://firebase.google.com/docs/web/learn-more#config-object
@@ -18,10 +18,9 @@ const app = initializeApp(firebaseConfig);
 // Initialize Firebase Authentication and get a reference to the service
 const auth = getAuth(app);
 
-export const teacherRegister = (email, password,isimSoyisim) => {
+export const teacherRegister = (email, password,isimSoyisim,navigate) => {
   createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
-      console.log(userCredential);
       updateProfile(auth.currentUser, {
         displayName: isimSoyisim
       }).then(() => {
@@ -31,8 +30,34 @@ export const teacherRegister = (email, password,isimSoyisim) => {
         // An error occurred
         // ...
       });
+      navigate("/")
     })
     .catch((error) => {
 
     });
 };
+
+
+export const teacherLoginFirebase = (email, password,navigate) => {
+  signInWithEmailAndPassword(auth, email, password)
+  .then((userCredential) => {
+    navigate("/")
+  })
+  .catch((error) => {
+    console.log(error)
+  });
+};
+
+export const teacherLogOut = () => {
+  signOut(auth)
+}
+
+export const teacherFullName = (setCurrentTeacher) => {
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      setCurrentTeacher(user.displayName)
+    } else {
+      setCurrentTeacher(false)
+    }
+  });
+}

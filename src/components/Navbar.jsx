@@ -15,7 +15,7 @@ const Wrapper = styled.div`
     rgba(255, 255, 255, 1) 100%
   );
   .show-navbar {
-    height: 3rem;
+    height: 4rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -24,6 +24,8 @@ const Wrapper = styled.div`
     .nav-links {
       list-style: none;
       display: flex;
+      justify-content:space-around;
+      align-items: center;
       gap: 2rem;
       a {
         position: relative;
@@ -62,7 +64,7 @@ const Wrapper = styled.div`
     .nav-hamburger {
       display: none;
     }
-    @media screen and (max-width: 750px) {
+    @media screen and (max-width: 890px) {
       display: flex;
       .nav-loginregister {
         display: none;
@@ -82,7 +84,8 @@ const Wrapper = styled.div`
 `;
 
 function Navbar() {
-  const { forSideBarIsOpen, setForSideBarIsOpen } = useContext(AppContext);
+  const { forSideBarIsOpen, setForSideBarIsOpen, currentTeacher } =
+    useContext(AppContext);
   const handleHamburger = () => {
     setForSideBarIsOpen(!forSideBarIsOpen);
   };
@@ -93,15 +96,28 @@ function Navbar() {
         <nav>
           <ul className="nav-links">
             <li>
-              <Link to="/">Main</Link>
+              <Link to="/">Anasayfa</Link>
             </li>
             <li>
-              <Link to="/about">About</Link>
+              <Link to="/about">Hakkımızda</Link>
             </li>
             <li>
-              <Link to="/contact">Contact Us</Link>
+              <Link to="/contact">İletişim</Link>
             </li>
           </ul>
+          {currentTeacher && (
+            <ul className="nav-links">
+              <li>
+                <Link to="/">Sınıf Oluştur</Link>
+              </li>
+              <li>
+                <Link to="/about">Öğrenci Ekle</Link>
+              </li>
+              <li>
+                <Link to="/contact">İşlemler</Link>
+              </li>
+            </ul>
+          )}
         </nav>
         <div className="nav-loginregister">
           <LoginAndRegisterComp />

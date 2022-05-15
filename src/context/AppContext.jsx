@@ -1,17 +1,22 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
+import { teacherFullName } from "../firebase/Firebase";
 
 const AppContext = createContext();
 
 export const AppContextProvider = ({ children }) => {
   const [forSideBarIsOpen, setForSideBarIsOpen] = useState(true);
-  const [curretTeacher, setCurrentTeacher] = useState();
+  const [currentTeacher, setCurrentTeacher] = useState();
+  useEffect(() => {
+    teacherFullName(setCurrentTeacher);
+  }, []);
+  console.log(currentTeacher)
   return (
     <AppContext.Provider
       value={{
         forSideBarIsOpen,
         setForSideBarIsOpen,
         setCurrentTeacher,
-        curretTeacher,
+        currentTeacher,
       }}
     >
       {children}

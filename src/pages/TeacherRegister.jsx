@@ -1,12 +1,11 @@
-import React, { useContext } from "react";
+import React from "react";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import styled from "styled-components";
-import AppContext from "../context/AppContext";
 import { teacherRegister } from "../firebase/Firebase";
-
+import {useNavigate } from "react-router-dom";
 const ForLogin = styled.div`
   height: 100vh;
   display: flex;
@@ -56,7 +55,7 @@ const myValidationSchema = Yup.object({
 });
 
 function TeacherRegister() {
-  const {setCurrentTeacher,currentTeacher} = useContext(AppContext)
+  const navigate = useNavigate()
   const initialValues = {
     firstname: "",
     lastname: "",
@@ -67,14 +66,7 @@ function TeacherRegister() {
 
   const handleSubmit = (values, { resetForm }) => {
     const isimSoyisim = `${values.firstname.charAt(0).toUpperCase() + values.firstname.slice(1)} ${values.lastname.charAt(0).toUpperCase() +values.lastname.slice(1)}`
-    teacherRegister(values.email,values.password,isimSoyisim)
-    alert(
-      `
-          firstname : ${values.firstname},
-          latsname : ${values.lastname},
-          email:${values.email}
-          `
-    );
+    teacherRegister(values.email,values.password,isimSoyisim,navigate)
     resetForm();
   };
   return (
@@ -150,7 +142,7 @@ function TeacherRegister() {
                 <Button
                   variant="contained"
                   color="success"
-                  sx={{ width: "30%" }}
+                  sx={{ width: "200px" }}
                   type="submit"
                 >
                   Register
