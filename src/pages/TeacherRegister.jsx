@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import styled from "styled-components";
-import { teacherRegister } from "../firebase/Firebase";
-import {useNavigate } from "react-router-dom";
+import {  teacherRegister } from "../firebase/Firebase";
+import { useNavigate } from "react-router-dom";
+
 const ForLogin = styled.div`
   height: 100vh;
   display: flex;
@@ -55,7 +56,8 @@ const myValidationSchema = Yup.object({
 });
 
 function TeacherRegister() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const [imgUrl, setImgUrl] = useState({file:"",imagePreviewUrl:""});
   const initialValues = {
     firstname: "",
     lastname: "",
@@ -63,15 +65,39 @@ function TeacherRegister() {
     password: "",
     password2: "",
   };
+  console.log(imgUrl.imagePreviewUrl);
+  const handleFile = (e) => {
+    e.preventDefault();
+
+    let reader = new FileReader();
+    let file = e.target.files[0];
+    reader.onloadend = () => {
+      setImgUrl({
+        file: file,
+        imagePreviewUrl: reader.result,
+      });
+    };
+    reader.readAsDataURL(file);
+  };
 
   const handleSubmit = (values, { resetForm }) => {
-    const isimSoyisim = `${values.firstname.charAt(0).toUpperCase() + values.firstname.slice(1)} ${values.lastname.charAt(0).toUpperCase() +values.lastname.slice(1)}`
-    teacherRegister(values.email,values.password,isimSoyisim,navigate)
+    const isimSoyisim = `${
+      values.firstname.charAt(0).toUpperCase() + values.firstname.slice(1)
+    } ${values.lastname.charAt(0).toUpperCase() + values.lastname.slice(1)}`;
+    teacherRegister(values.email, values.password, isimSoyisim, navigate);
+
     resetForm();
   };
+  console.log(initialValues);
+
+
+
+  console.log(imgUrl);
+
   return (
     <ForLogin>
       <div className="login-form">
+        
         <Formik
           initialValues={initialValues}
           onSubmit={handleSubmit}
@@ -86,6 +112,7 @@ function TeacherRegister() {
             handleBlur,
           }) => (
             <form className="box" onSubmit={handleSubmit}>
+              <input type="file" onChange={handleFile}/>
               <TextField
                 name="firstname"
                 label="First Name"

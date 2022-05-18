@@ -8,6 +8,7 @@ import About from "../pages/About";
 import Contact from "../pages/Contact";
 import Sidebar from "../components/Sidebar";
 import Footer from "../components/Footer";
+import Profile from "../pages/Profile";
 
 function AppRouter() {
   return (
@@ -20,6 +21,7 @@ function AppRouter() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/login" element={<TeacherLogin />} />
         <Route path="/register" element={<TeacherRegister />} />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
       <Footer />
     </Router>

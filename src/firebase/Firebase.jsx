@@ -37,10 +37,21 @@ export const teacherRegister = (email, password,isimSoyisim,navigate) => {
     });
 };
 
+export const resimEkleme = (imageUrl) => {
+  updateProfile(auth.currentUser, {
+     photoURL: imageUrl
+  }).then((res) => {
+    console.log(res)
+  }).catch((error) => {
+    console.log(error)
+  });
+}
+
 
 export const teacherLoginFirebase = (email, password,navigate) => {
   signInWithEmailAndPassword(auth, email, password)
   .then((userCredential) => {
+    console.log(userCredential)
     navigate("/")
   })
   .catch((error) => {
@@ -55,7 +66,7 @@ export const teacherLogOut = () => {
 export const teacherFullName = (setCurrentTeacher) => {
   onAuthStateChanged(auth, (user) => {
     if (user) {
-      setCurrentTeacher(user.displayName)
+      setCurrentTeacher(user)
     } else {
       setCurrentTeacher(false)
     }

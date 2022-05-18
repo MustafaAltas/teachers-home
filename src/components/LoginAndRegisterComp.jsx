@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import styled from "styled-components";
 import LoginIcon from "@mui/icons-material/Login";
 import HowToRegIcon from "@mui/icons-material/HowToReg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import NoMeetingRoomIcon from "@mui/icons-material/NoMeetingRoom";
 import AppContext from "../context/AppContext";
 import { teacherLogOut } from "../firebase/Firebase";
@@ -29,6 +29,7 @@ const Wrapper = styled.div`
 
 function LoginAndRegisterComp() {
   const { currentTeacher } = useContext(AppContext);
+  const navigate = useNavigate();
   return (
     <Wrapper>
       {!currentTeacher ? (
@@ -45,8 +46,8 @@ function LoginAndRegisterComp() {
           <div className="login-register" onClick={teacherLogOut}>
             Logout <NoMeetingRoomIcon />
           </div>
-          <div className="login-register">
-            {currentTeacher} <PersonIcon />
+          <div className="login-register" onClick={() => navigate("/profile")}> 
+            {currentTeacher.displayName} <PersonIcon />
           </div>
         </>
       )}
