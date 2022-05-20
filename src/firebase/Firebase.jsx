@@ -37,9 +37,9 @@ export const teacherRegister = (email, password,isimSoyisim,navigate) => {
     });
 };
 
-export const resimEkleme = (imageUrl) => {
+export const resimEkleme = (resimUrl) => {
   updateProfile(auth.currentUser, {
-     photoURL: imageUrl
+     photoURL: resimUrl
   }).then((res) => {
     console.log(res)
   }).catch((error) => {

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { Formik } from "formik";
@@ -57,7 +57,7 @@ const myValidationSchema = Yup.object({
 
 function TeacherRegister() {
   const navigate = useNavigate();
-  const [imgUrl, setImgUrl] = useState({file:"",imagePreviewUrl:""});
+  
   const initialValues = {
     firstname: "",
     lastname: "",
@@ -65,20 +65,8 @@ function TeacherRegister() {
     password: "",
     password2: "",
   };
-  console.log(imgUrl.imagePreviewUrl);
-  const handleFile = (e) => {
-    e.preventDefault();
 
-    let reader = new FileReader();
-    let file = e.target.files[0];
-    reader.onloadend = () => {
-      setImgUrl({
-        file: file,
-        imagePreviewUrl: reader.result,
-      });
-    };
-    reader.readAsDataURL(file);
-  };
+
 
   const handleSubmit = (values, { resetForm }) => {
     const isimSoyisim = `${
@@ -92,7 +80,7 @@ function TeacherRegister() {
 
 
 
-  console.log(imgUrl);
+
 
   return (
     <ForLogin>
@@ -112,7 +100,6 @@ function TeacherRegister() {
             handleBlur,
           }) => (
             <form className="box" onSubmit={handleSubmit}>
-              <input type="file" onChange={handleFile}/>
               <TextField
                 name="firstname"
                 label="First Name"

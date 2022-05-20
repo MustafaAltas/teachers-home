@@ -9,7 +9,6 @@ export const AppContextProvider = ({ children }) => {
   useEffect(() => {
     teacherFullName(setCurrentTeacher);
   }, []);
-  console.log(currentTeacher)
   return (
     <AppContext.Provider
       value={{
