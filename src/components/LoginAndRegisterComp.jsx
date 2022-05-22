@@ -43,7 +43,7 @@ function LoginAndRegisterComp() {
         </>
       ) : (
         <>
-          <div className="login-register" onClick={teacherLogOut}>
+          <div className="login-register" onClick={() => teacherLogOut(navigate)}>
             Logout <NoMeetingRoomIcon />
           </div>
           <div className="login-register" onClick={() => navigate("/profile")}> 

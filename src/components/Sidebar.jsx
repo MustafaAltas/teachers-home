@@ -93,25 +93,25 @@ function Sidebar() {
         <nav>
           <ul className="nav-links">
             <li>
-              <Link to="/">Main</Link>
+              <Link to="/">Anasayfa</Link>
             </li>
             <li>
-              <Link to="/about">About</Link>
+              <Link to="/about">Hakkımızda</Link>
             </li>
             <li>
-              <Link to="/contact">Contact Us</Link>
+              <Link to="/contact">İletişim</Link>
             </li>
           </ul>
           {currentTeacher && (
             <ul className="nav-links">
               <li>
-                <Link to="/">Main</Link>
+                <Link to="/createclass">Sınıf Oluştur</Link>
               </li>
               <li>
-                <Link to="/about">About</Link>
+                <Link to="/createstudent">Öğrenci Ekle</Link>
               </li>
               <li>
-                <Link to="/contact">Contact Us</Link>
+                <Link to="/process">İşlemler</Link>
               </li>
             </ul>
           )}

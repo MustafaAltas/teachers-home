@@ -59,8 +59,9 @@ export const teacherLoginFirebase = (email, password,navigate) => {
   });
 };
 
-export const teacherLogOut = () => {
+export const teacherLogOut = (navigate) => {
   signOut(auth)
+  navigate("/")
 }
 
 export const teacherFullName = (setCurrentTeacher) => {

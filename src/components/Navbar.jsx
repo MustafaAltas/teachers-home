@@ -108,13 +108,13 @@ function Navbar() {
           {currentTeacher && (
             <ul className="nav-links">
               <li>
-                <Link to="/">Sınıf Oluştur</Link>
+                <Link to="/createclass">Sınıf Oluştur</Link>
               </li>
               <li>
-                <Link to="/about">Öğrenci Ekle</Link>
+                <Link to="/createstudent">Öğrenci Ekle</Link>
               </li>
               <li>
-                <Link to="/contact">İşlemler</Link>
+                <Link to="/process">İşlemler</Link>
               </li>
             </ul>
           )}

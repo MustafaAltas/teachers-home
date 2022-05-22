@@ -9,6 +9,9 @@ import Contact from "../pages/Contact";
 import Sidebar from "../components/Sidebar";
 import Footer from "../components/Footer";
 import Profile from "../pages/Profile";
+import CreateClass from "../pages/CreateClass";
+import CreateStudent from "../pages/CreateStudent";
+import Process from "../pages/Process";
 
 function AppRouter() {
   return (
@@ -22,6 +25,9 @@ function AppRouter() {
         <Route path="/login" element={<TeacherLogin />} />
         <Route path="/register" element={<TeacherRegister />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/createclass" element={<CreateClass />} />
+        <Route path="/createstudent" element={<CreateStudent />} />
+        <Route path="/process" element={<Process />} />
       </Routes>
       <Footer />
     </Router>
