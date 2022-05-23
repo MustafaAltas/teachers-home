@@ -9,6 +9,14 @@ export const addData = (userId, name, email, imageUrl) => {
   });
 };
 
+export const createClassRoom = ( name,classRoomName) => {
+  const db = getDatabase();
+  set(ref(db, "classroom/"), {
+    username: name,
+    classroom : classRoomName
+  });
+};
+
 export const useData = (postId) => {
   const [dataImage, setDataImage] = useState("");
   useEffect(() => {
@@ -16,13 +24,13 @@ export const useData = (postId) => {
     const teacherRef = ref(db, "teachers/");
     onValue(teacherRef, (snapshot) => {
       const data = snapshot.val();
-      const arr = []
+      const arr = [];
       for (const id in data) {
-        arr.push({id,...data[id]});
-    }
-      setDataImage(arr)
+        arr.push({ id, ...data[id] });
+      }
+      setDataImage(arr);
     });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  return {dataImage}
+  return { dataImage };
 };

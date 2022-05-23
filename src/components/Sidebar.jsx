@@ -105,7 +105,7 @@ function Sidebar() {
           {currentTeacher && (
             <ul className="nav-links">
               <li>
-                <Link to="/createclass">Sınıf Oluştur</Link>
+                <Link to="/createclass">Sınıflarım</Link>
               </li>
               <li>
                 <Link to="/createstudent">Öğrenci Ekle</Link>

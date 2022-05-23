@@ -11,6 +11,7 @@ function Main() {
   },[dataImage])
   return (
     <Box sx={{ width: "100%", margin: "3rem auto" }}>
+      <h1 stlye={{margin:"2rem"}}>Öğretmenler Tablosu</h1>
       <Grid container rowSpacing={4} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
         {teacherMain?.map((item) => {
           return (
