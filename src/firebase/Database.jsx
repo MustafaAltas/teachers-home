@@ -1,5 +1,6 @@
 import { getDatabase, onValue, push, ref, remove, set } from "firebase/database";
 import { useEffect, useState } from "react";
+
 export const addData = (userId, name, email, imageUrl) => {
   const db = getDatabase();
   set(ref(db, "teachers/" + userId), {
@@ -18,6 +19,17 @@ export const createClassRoom = ( name,classRoomName) => {
     classroom : classRoomName
   });
 };
+
+export const addStudent = (classRoomName,fullname,email,number) => {
+  const db = getDatabase();
+  const studentAdd = ref(db,`${classRoomName}/`)
+  const studentAddRef = push(studentAdd)
+  set((studentAddRef),{
+    fullname : fullname,
+    email : email,
+    number: number
+  })
+}
 
 export const useData = (postId) => {
   const [dataImage, setDataImage] = useState("");
@@ -55,6 +67,25 @@ export const useClassRoom = () =>{
 
   },[])
   return {dataClassRoom}
+}
+export const useStudentData = (classRoomName) =>{
+  const [students,setStudents] = useState();
+  useEffect(() =>{
+      const db = getDatabase();
+      const blogRef = ref(db,`${classRoomName}/`);
+      onValue(blogRef, (snapshot) => {
+          const data = snapshot.val();
+          const arr = [];
+          for (const id in data) {
+              arr.push({id,...data[id]});
+          }
+  
+          setStudents(arr);
+        });
+
+
+  },[classRoomName])
+  return {students}
 }
 
 export const DeleteClassRoom =(id) =>{
