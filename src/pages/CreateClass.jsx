@@ -6,7 +6,7 @@ function CreateClass() {
   return (
     <div>
       <Container maxWidth="md">
-        <Box sx={{height: "100vh",margin:"2rem" }}>
+        <Box sx={{minHeight: "100vh",margin:"2rem" }}>
           <AddClassRoom />
         </Box>
       </Container>

@@ -11,3 +11,15 @@ export const onayMesaj = (mesaj) => {
     progress: undefined,
   });
 };
+
+export const uyarıMesaj = (mesaj) => {
+  toast.warn(mesaj, {
+    position: "top-right",
+    autoClose: 2000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    });
+}

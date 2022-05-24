@@ -76,7 +76,6 @@ function Profile() {
   useEffect(() => {
     setDatabaseToProfile([...dataImage]);
   }, [dataImage]);
-  console.log(databaseToProfile);
   return (
     <ProfileDiv>
       <div className="profile">
@@ -84,7 +83,7 @@ function Profile() {
           {databaseToProfile
             ?.filter((e) => e.id === currentTeacher.uid)
             .map((e) => {
-              return <img src={e?.profile_picture} alt="" width="250px" />;
+              return <img src={e?.profile_picture} alt="" width="250px" key={e.id} />;
             })}
           <div className="profile-input">
             <label htmlFor="x" className="input-label">
