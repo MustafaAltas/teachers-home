@@ -20,9 +20,9 @@ export const createClassRoom = ( name,classRoomName) => {
   });
 };
 
-export const addStudent = (classRoomName,fullname,email,number) => {
+export const addStudent = (classRoomName,fullname,email,number,teacherEmail) => {
   const db = getDatabase();
-  const studentAdd = ref(db,`${classRoomName}/`)
+  const studentAdd = ref(db,`students/${teacherEmail}/${classRoomName}/`)
   const studentAddRef = push(studentAdd)
   set((studentAddRef),{
     fullname : fullname,
@@ -68,11 +68,11 @@ export const useClassRoom = () =>{
   },[])
   return {dataClassRoom}
 }
-export const useStudentData = (classRoomName) =>{
+export const useStudentData = () =>{
   const [students,setStudents] = useState();
   useEffect(() =>{
       const db = getDatabase();
-      const blogRef = ref(db,`${classRoomName}/`);
+      const blogRef = ref(db,"students/");
       onValue(blogRef, (snapshot) => {
           const data = snapshot.val();
           const arr = [];
@@ -84,7 +84,7 @@ export const useStudentData = (classRoomName) =>{
         });
 
 
-  },[classRoomName])
+  },[])
   return {students}
 }
 

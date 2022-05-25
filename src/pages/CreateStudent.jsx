@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { Formik } from "formik";
@@ -7,13 +7,17 @@ import styled from "styled-components";
 import Select from "@mui/material/Select";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
-import { addStudent, useClassRoom, useStudentData } from "../firebase/Database";
-
+import { addStudent, useClassRoom } from "../firebase/Database";
+import ShowStudentList from "../components/ShowStudentList";
+import AppContext from "../context/AppContext";
 const ForLogin = styled.div`
-  height: 100vh;
+  padding: 5rem;
+  /* height: 100vh; */
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
   .login-form {
     width: 40vw;
     min-width: 450px;
@@ -47,16 +51,15 @@ const myValidationSchema = Yup.object({
   number: Yup.number()
     .required("Numara Girmeniz gerekmektedir.")
     .min(8, "Çok kısa/ En az 8 karakter giriniz."),
-    classroom: Yup.string()
-    .nullable()
-    .required("Sınıf Girmeniz gerekmektedir."),
+  classroom: Yup.string().nullable().required("Sınıf Girmeniz gerekmektedir."),
 });
 
 function CreateStudent() {
   // const navigate = useNavigate();
   const { dataClassRoom } = useClassRoom();
-  
-  console.log(dataClassRoom)
+  // const { students } = useStudentData();
+  const { currentTeacher } = useContext(AppContext);
+
   const initialValues = {
     firstname: "",
     lastname: "",
@@ -64,16 +67,20 @@ function CreateStudent() {
     number: "",
     classroom: "",
   };
-  const {student} = useStudentData(initialValues.classroom)
-  console.log(student);
+
   const handleSubmit = (values, { resetForm }) => {
     const isimSoyisim = `${
       values.firstname.charAt(0).toUpperCase() + values.firstname.slice(1)
     } ${values.lastname.charAt(0).toUpperCase() + values.lastname.slice(1)}`;
-    addStudent(values.classroom,isimSoyisim,values.email,values.number)
+    addStudent(
+      values.classroom,
+      isimSoyisim,
+      values.email,
+      values.number,
+      currentTeacher.uid
+    );
     resetForm();
   };
- 
 
   return (
     <ForLogin>
@@ -107,11 +114,15 @@ function CreateStudent() {
                 error={touched.select && Boolean(errors.select)}
                 onBlur={handleBlur}
               >
-                {
-                  dataClassRoom?.map((item) => {
-                    return <MenuItem value={item.classroom} key={item.id}>{item.classroom}</MenuItem>
-                  })
-                }
+                {dataClassRoom
+                  ?.filter((e) => e.username === currentTeacher.displayName)
+                  .map((item) => {
+                    return (
+                      <MenuItem value={item.classroom} key={item.id}>
+                        {item.classroom}
+                      </MenuItem>
+                    );
+                  })}
               </Select>
               <TextField
                 name="firstname"
@@ -169,6 +180,7 @@ function CreateStudent() {
           )}
         </Formik>
       </div>
+      <ShowStudentList />
     </ForLogin>
   );
 }
