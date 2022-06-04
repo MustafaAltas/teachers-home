@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext,useState } from "react";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { Formik } from "formik";
@@ -10,6 +10,8 @@ import MenuItem from "@mui/material/MenuItem";
 import { addStudent, useClassRoom } from "../firebase/Database";
 import ShowStudentList from "../components/ShowStudentList";
 import AppContext from "../context/AppContext";
+import { onayMesaj } from "../helper/Toastify";
+
 const ForLogin = styled.div`
   padding: 5rem;
   /* height: 100vh; */
@@ -59,7 +61,7 @@ function CreateStudent() {
   const { dataClassRoom } = useClassRoom();
   // const { students } = useStudentData();
   const { currentTeacher } = useContext(AppContext);
-
+  const [updateControl,setUpdateControl] = useState()
   const initialValues = {
     firstname: "",
     lastname: "",
@@ -79,6 +81,8 @@ function CreateStudent() {
       values.number,
       currentTeacher.uid
     );
+    setUpdateControl(!updateControl);
+    onayMesaj("Öğrenci başarılı bir şekilde kaydedildi.")
     resetForm();
   };
 
@@ -173,14 +177,14 @@ function CreateStudent() {
                   sx={{ width: "200px" }}
                   type="submit"
                 >
-                  Register
+                  Kayıt
                 </Button>
               </div>
             </form>
           )}
         </Formik>
       </div>
-      <ShowStudentList />
+      <ShowStudentList updateControl={updateControl}/>
     </ForLogin>
   );
 }

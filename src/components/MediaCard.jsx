@@ -5,7 +5,6 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 
 export default function MediaCard({item}) {
-  console.log(item)
   return (
     <Card sx={{ maxWidth: 345,margin:"auto" }}>
       <CardMedia

@@ -12,6 +12,8 @@ import Profile from "../pages/Profile";
 import CreateClass from "../pages/CreateClass";
 import CreateStudent from "../pages/CreateStudent";
 import Process from "../pages/Process";
+import Notes from "../pages/Notes";
+
 
 function AppRouter() {
   return (
@@ -28,6 +30,7 @@ function AppRouter() {
         <Route path="/createclass" element={<CreateClass />} />
         <Route path="/createstudent" element={<CreateStudent />} />
         <Route path="/process" element={<Process />} />
+        <Route path="/notes" element={<Notes />} />
       </Routes>
       <Footer />
     </Router>
